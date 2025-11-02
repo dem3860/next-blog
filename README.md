@@ -1,3 +1,7 @@
+# next-blog
+
+udemy での next 勉強レポジトリ。それをベースに自分で機能を足していく。
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

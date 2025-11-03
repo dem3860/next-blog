@@ -12,7 +12,7 @@ type ActionState = {
   errors: Record<string, string[]>;
 };
 
-function handleValidationError(error: ZodError<unknown>): ActionState {
+function handleValidationError(error: ZodError): ActionState {
   const { fieldErrors, formErrors } = error.flatten();
 
   if (formErrors.length > 0) {
@@ -21,7 +21,8 @@ function handleValidationError(error: ZodError<unknown>): ActionState {
       errors: { ...fieldErrors, confirmPassword: formErrors },
     };
   }
-  return { success: false, errors: fieldErrors };
+  const castedFieldErrors = fieldErrors as Record<string, string[]>;
+  return { success: false, errors: castedFieldErrors };
 }
 
 function handleError(customErrors: Record<string, string[]>): ActionState {

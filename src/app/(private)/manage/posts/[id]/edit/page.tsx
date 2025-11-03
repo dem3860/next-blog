@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import EditPostForm from "./EditPostForm";
 
 type Params = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 export default async function EditPage({ params }: Params) {
   const session = await auth();

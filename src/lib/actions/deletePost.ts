@@ -1,6 +1,5 @@
 "use server";
-import { postSchema } from "@/validations/post";
-import { saveImage } from "@/utils/image";
+
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 

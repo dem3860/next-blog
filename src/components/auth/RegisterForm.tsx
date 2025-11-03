@@ -1,18 +1,10 @@
 "use client";
 
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { useActionState } from "react";
-import { authenticate } from "@/lib/actions/authenticate";
-import { useSearchParams } from "next/navigation";
 import { createUser } from "@/lib/actions/createUser";
 
 export default function RegisterForm() {

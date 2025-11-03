@@ -1,30 +1,28 @@
-import { getPost } from "@/lib/post";
-import { notFound } from "next/navigation";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import Link from "next/link";
-import { PostCardProps } from "@/types/post";
-import { format, formatDistanceToNow } from "date-fns";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ja } from "date-fns/locale";
 import Image from "next/image";
+import { getOwnPost } from "@/lib/ownPost";
+import { auth } from "@/auth";
+import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import { format } from "date-fns";
 
 type Params = {
   params: Promise<{ id: string }>;
 };
+export default async function ShowPage({ params }: Params) {
+  const session = await auth();
+  const userId = session?.user?.id;
+  if (!session?.user?.email || !userId) {
+    throw new Error("ユーザー情報の取得に失敗しました。");
+  }
 
-export default async function PostPage({ params }: Params) {
   const { id } = await params;
-  const post = await getPost(id);
+  const post = await getOwnPost(userId, id);
   if (!post) {
-    notFound();
+    return notFound();
   }
 
   return (
